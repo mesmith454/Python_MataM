@@ -1,2 +1,2 @@
 # Python
-repo for Python Course
+Repo for Python Course
