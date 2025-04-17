@@ -11,7 +11,12 @@ def about():
 
 @app.route('/fortune',methods = ['POST', 'GET'])
 def fortune():
-    return render_template('fortune.html')
+    if request.method == 'POST':
+        return render_template('fortune.html') #render base template-should be first page loaded
+    else:
+        return 'fortune goes here' #currently loading first
+    #take user input
+    #return user fortune
 
 if __name__ == '__main__':
     app.run(debug = True)
