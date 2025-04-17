@@ -36,7 +36,7 @@
             function getFortune(choiceType, choice) {
                 // connects getFortune js function to get_function python method
                 fetch('/get_fortune', {
-                    method: 'POST'
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
