@@ -9,15 +9,20 @@ def default():
 def about():
     return 'Megan Mata, 33F, Network Administration Certification Track.'
 
-@app.route('/fortune',methods = ['POST'])
+@app.route('/fortune',methods = ['GET', 'POST'])
 def fortune_form():
-    return render_template('fortune.html')
+    if request.method == 'POST':
+        return render_template('fortune.html')
+        
+    else:
+        #retrieve the form data
+        user = request.form['user']
+        color = request.form['color']
+        number = request.form['number']
 
-def accept_input():
-    return 'Input Accepted'
+        return render_template('result.html', user=user, color=color, number=number)
 
-def return_fortune():
-    return 'Here is your fortune:'
+
     
 
 
