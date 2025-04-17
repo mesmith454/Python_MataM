@@ -1,16 +1,40 @@
-<form method="POST" action="/fortune">
-    <input type="text" name="user">
-    <select name="color">
-        <option>red</option>
-        <option>yellow</option>
-        <option>blue</option>
-        <option>green</option>
-    </select>
-    <select name="number">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-    </select>
-    <button>submit</button>
-</form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fortune Teller</title>
+    </head>
+    <body>
+
+        <h1>Fortune Teller</h1>
+
+        <div class="form">
+            <form method="POST" action="/fortune">
+                <input type="text" name="user">
+                <select name="color">
+                    <!-- onclick informs button function -->
+                    <option onclick="getFortune('color', 'red')">red</option>
+                    <option onclick="getFortune('color', 'yellow')">yellow</option>
+                    <option onclick="getFortune('color', 'blue')">blue</option>
+                    <option onclick="getFortune('color', 'green')">green</option>
+                </select>
+                <select name="number">
+                    <option onclick="getFortune('number', '1')">1</option>
+                    <option onclick="getFortune('number', '2')">2</option>
+                    <option onclick="getFortune('number', '3')">3</option>
+                    <option onclick="getFortune('number', '4')">4</option>
+                </select>
+                <button >submit</button>
+            </form>
+        </div>
+
+        <div id="fortune"> 
+            <!-- A Fortune Will Appear Here -->
+        </div>
+
+    </body>
+</html>
+
+
+
+
+
