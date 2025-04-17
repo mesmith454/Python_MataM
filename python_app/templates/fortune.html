@@ -34,6 +34,7 @@
         <!-- grabs form data, uses it to return a fortune message to specified area of webpage-->
         <script>
             function getFortune(choiceType, choice) {
+                // connects getFortune js function to get_function python method
                 fetch('/get_fortune', {
                     method: 'POST'
                     headers: {
@@ -41,7 +42,9 @@
                     },
                     body: JSON.stringify({choiceType: choiceType, choice: choice}),
                 })
+                // format response
                 .then(response => response.json())
+                // return response to window
                 .then(data => {
                     document.getElementById('fortune').textContent = data.fortune;
                 });
