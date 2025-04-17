@@ -11,7 +11,7 @@
             <form method="POST" action="/fortune">
                 <input type="text" name="user">
                 <select name="color">
-                    <!-- onclick informs button function -->
+                    <!-- onclick listens for click event and informs button function -->
                     <option onclick="getFortune('color', 'red')">red</option>
                     <option onclick="getFortune('color', 'yellow')">yellow</option>
                     <option onclick="getFortune('color', 'blue')">blue</option>
@@ -30,6 +30,23 @@
         <div id="fortune"> 
             <!-- A Fortune Will Appear Here -->
         </div>
+
+        <!-- grabs form data, uses it to return a fortune message to specified area of webpage-->
+        <script>
+            function getFortune(choiceType, choice) {
+                fetch('/get_fortune', {
+                    method: 'POST'
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({choiceType: choiceType, choice: choice}),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('fortune').textContent = data.fortune;
+                });
+            }
+        </script>
 
     </body>
 </html>
