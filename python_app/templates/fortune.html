@@ -23,33 +23,13 @@
                     <option onclick="getFortune('number', '3')">3</option>
                     <option onclick="getFortune('number', '4')">4</option>
                 </select>
-                <button >submit</button>
+                <button onclick="getFortune('color', 'number')">submit</button>
             </form>
         </div>
 
         <div id="fortune"> 
             <!-- A Fortune Will Appear Here -->
         </div>
-
-        <!-- grabs form data, uses it to return a fortune message to specified area of webpage-->
-        <script>
-            function getFortune(choiceType, choice) {
-                // connects getFortune js function to get_function python method
-                fetch('/get_fortune', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({choiceType: choiceType, choice: choice}),
-                })
-                // format response
-                .then(response => response.json())
-                // return response to window
-                .then(data => {
-                    document.getElementById('fortune').textContent = data.fortune;
-                });
-            }
-        </script>
 
     </body>
 </html>
