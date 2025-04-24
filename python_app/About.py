@@ -24,11 +24,11 @@ class games(db.Model):
 
 @app.route('/')
 def default():
-    return 'This is my first flask app'
+    return render_template('index.html')
 
 @app.route('/about')
 def about():
-    return 'Megan Mata, 33F, Network Administration Certification Track.'
+    return render_template('about.html')
 
 @app.route('/fortune',methods = ['GET', 'POST'])
 def fortune():
@@ -51,11 +51,13 @@ def show_all():
 @app.route('/new', methods = ['GET', 'POST'])
 def new():
     if request.method == 'POST':
+        #error checking to ensure all fields filled 
         if not request.form['name'] or not request.form['dev'] or not request.form['genre'] or not request.form['rel'] or not request.form['summ']:
             flash('Please enter all fields', 'error')
+        #pull data from form       
         else:
             game = games(request.form['name'], request.form['dev'], request.form['genre'], request.form['rel'], request.form['summ'])
-
+            #submit form data as a game object and show success message
             db.session.add(game)
             db.session.commit()
             flash('Game successfully added!')
