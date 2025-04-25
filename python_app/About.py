@@ -4,10 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///games.sqlite3'
+# needed for post function DON'T TAKE IT OUT AGAIN.
 app.config['SECRET_KEY'] = "random string"
 
 db = SQLAlchemy(app)
-class games(db.Model):
+class Game(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(100))
     dev = db.Column(db.String(50))
@@ -46,7 +47,7 @@ def fortune():
 @app.route('/show_all')
 def show_all():
     # return the show_all template populated with info from database
-    return render_template('show_all.html', games = games.query.all() )
+    return render_template('show_all.html', games = Game.query.all() )
 
 @app.route('/new', methods = ['GET', 'POST'])
 def new():
@@ -56,7 +57,7 @@ def new():
             flash('Please enter all fields', 'error')
         #pull data from form       
         else:
-            game = games(request.form['name'], request.form['dev'], request.form['genre'], request.form['rel'], request.form['summ'])
+            game = Game(request.form['name'], request.form['dev'], request.form['genre'], request.form['rel'], request.form['summ'])
             #submit form data as a game object and show success message
             db.session.add(game)
             db.session.commit()
@@ -66,8 +67,8 @@ def new():
 
 @app.route('/summary')
 def summary():
+    # want this to grab row details and return them in a table on an html page
     return render_template('summary.html')
-
 
 if __name__ == '__main__':
     with app.app_context():
