@@ -14,7 +14,7 @@ class Game(db.Model):
     dev = db.Column(db.String(50))
     genre = db.Column(db.String(200))
     rel = db.Column(db.String(10))
-    detail = db.Column(db.String(80))
+    summ = db.Column(db.String(80))
 
     def __init__(self, name, dev, genre, rel, summ):
         self.name = name
@@ -65,10 +65,10 @@ def new():
             return redirect(url_for('show_all'))
     return render_template('new.html')
 
-@app.route('/summary')
-def summary():
-    # want this to grab row details and return them in a table on an html page
-    return render_template('summary.html')
+@app.route('/game/<int:game_id>/')
+def game(game_id):
+    game = Game.query.get_or_404(game_id)
+    return render_template('game.html', game=game)
 
 if __name__ == '__main__':
     with app.app_context():

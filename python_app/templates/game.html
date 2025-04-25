@@ -1,0 +1,36 @@
+<html>
+   <body>
+
+   {% for game in games %}   
+      <h3> {{ game.name }}</h3>
+   {% endfor %}
+   
+   <table>
+      <thead>
+         <tr>
+            <th>Name</th>
+            <th>Developer</th>
+            <th>Genre</th>
+            <th>Release Date</th>
+            <th>Table ID</th>
+            <th>Summary</th>
+         
+         </tr>
+      </thead>
+
+      <tbody>
+         {% for game in games %}
+            <tr>
+               <td>{{ game.name }}</td>
+               <td>{{ game.dev }}</td>
+               <td>{{ game.genre }}</td>
+               <td>{{ game.rel }}</td>
+               <td>{{ game.id }}</td>
+               <td>{{ game.summ }}</td>
+            </tr>
+         {% endfor %}
+         </tbody>
+      </table>
+
+   </body>
+</html>
