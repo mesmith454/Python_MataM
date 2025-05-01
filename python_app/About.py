@@ -1,11 +1,19 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
+import requests
 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///games.sqlite3'
 # needed for post function DON'T TAKE IT OUT AGAIN.
 app.config['SECRET_KEY'] = "random string"
+
+movies = [
+    {"title": "Titanic",
+     "year": "1997"},
+    {"title": "O Brother Where Art Thou",
+     "year": "2000"}
+]
 
 db = SQLAlchemy(app)
 class Game(db.Model):
@@ -22,6 +30,7 @@ class Game(db.Model):
         self.genre = genre
         self.rel = rel
         self.summ = summ
+
 
 @app.route('/')
 def default():
@@ -65,10 +74,26 @@ def new():
             return redirect(url_for('show_all'))
     return render_template('new.html')
 
-@app.route('/game/<int:game_id>/')
-def game(game_id):
-    game = Game.query.get_or_404(game_id)
-    return render_template('game.html', game=game)
+@app.route('/game/<int:gid>/')
+def game(gid):
+    this_game = Game.query.get(gid)
+    return render_template('game.html', game = this_game)
+
+# endpoint: get list of movies (GET)
+@app.route('/movies')
+def get_movies():
+    return jsonify(movies)
+
+# endpoint: post new movie to list (POST)
+@app.route('/add_movie', methods=['GET', 'POST'])
+def add_movie():
+    if request.method == 'POST':
+        movie = request.form
+        response_data = {"message": "Succesful Submit", "movie": dict(movie)}
+        movies.append(movie)
+        return jsonify(response_data), 201
+    return render_template('add_movie.html')
+
 
 if __name__ == '__main__':
     with app.app_context():

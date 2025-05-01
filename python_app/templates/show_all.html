@@ -35,7 +35,7 @@
                   <td>{{ game.genre }}</td>
                   <td>{{ game.rel }}</td>
                   <td>{{ game.id}}</td>
-                  <td><a href = "{{url_for('game', game_id=game.id)}}">Details</a></td>
+                  <td><a href = "{{url_for('game', gid=game.id)}}">Details</a></td>
                </tr>
             {% endfor %}
          </tbody>
