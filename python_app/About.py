@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import requests
+import requests, os
 
 
 app = Flask(__name__)
@@ -98,4 +98,4 @@ def add_movie():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug = True)
+    app.run(debug = True, host="0.0.0.0", port=5000)
