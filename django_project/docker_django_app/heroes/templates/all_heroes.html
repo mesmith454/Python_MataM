@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>Nerd Heroes</h1>
+
+        <ul>
+            {% for x in myheroes %}
+                <li><a href="details/{{x.id}}" >{{x.firstname}} {{x.lastname}}, {{x.title}}, {{x.char_class}}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
